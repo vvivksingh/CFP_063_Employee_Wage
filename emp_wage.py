@@ -3,30 +3,24 @@ import random
 IS_ABSENT = 0
 IS_PRESENT_FULL_DAY = 1
 IS_PRESENT_PART_TIME = 2
-WAGE_PER_HOUR = 20
 FULL_DAY_HOURS = 8
 PART_TIME_HOURS = 4
-TOTAL_WORKING_DAYS = 20
-TOTAL_WORKING_HOURS = 100
 
 
-def calculateEmployeeWage():
-    emp_attandence = {
+def calculate_employee_wage(wage_per_hour, num_of_working_days, working_hour_per_month, company):
+    emp_attendence = {
         IS_PRESENT_FULL_DAY: FULL_DAY_HOURS,
         IS_PRESENT_PART_TIME: PART_TIME_HOURS,
         IS_ABSENT: 0
     }
 
-    workingDays = 0
-    totalWorkingHours = 0
+    working_days = 0
+    total_working_hours = 0
 
-    while (workingDays < TOTAL_WORKING_DAYS and totalWorkingHours < TOTAL_WORKING_HOURS):
+    while (working_days < num_of_working_days and total_working_hours < working_hour_per_month):
         emp_check = random.randint(0, 2)
-        totalWorkingHours = totalWorkingHours + emp_attandence.get(emp_check)
-        workingDays = workingDays + 1
+        total_working_hours = total_working_hours + emp_attendence.get(emp_check)
+        working_days = working_days + 1
 
-    return totalWorkingHours * WAGE_PER_HOUR
-
-
-totalWage = calculateEmployeeWage()
-
+    total_wage = total_working_hours * wage_per_hour
+    print(f"Employee total wage for Company {company} is {total_wage}")
