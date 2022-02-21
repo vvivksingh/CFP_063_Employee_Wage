@@ -7,7 +7,7 @@ FULL_DAY_HOURS = 8
 PART_TIME_HOURS = 4
 TOTAL_WORKING_DAYS = 20
 
-emp_attendence = {
+emp_attandence = {
     IS_PRESENT_FULL_DAY : WAGE_PER_HOUR * FULL_DAY_HOURS,
     IS_PRESENT_PART_TIME: WAGE_PER_HOUR * PART_TIME_HOURS,
     IS_ABSENT: 0
@@ -16,4 +16,4 @@ emp_attendence = {
 totalWage = 0
 for i in range(TOTAL_WORKING_DAYS):
     emp_check = random.randint(0, 2)
-    totalWage = totalWage + emp_attendence.get(emp_check)
+    totalWage = totalWage + emp_attandence.get(emp_check)
