@@ -7,7 +7,8 @@ FULL_DAY_HOURS = 8
 PART_TIME_HOURS = 4
 
 
-class CompanyEmpWage():
+class CompanyEmpWage:
+
     def __init__(self, wage_per_hour, number_of_working_days, work_hrs_per_month, company):
         self.wage_per_hour = wage_per_hour
         self.number_of_working_days = number_of_working_days
@@ -17,23 +18,25 @@ class CompanyEmpWage():
     def set_total_wage(self, total_wage):
         self.total_wage = total_wage
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Company = {self.company},Total Emp Wage = {self.total_wage}"
 
 
-class EmployeeWageBuilder():
+class EmployeeWageBuilder:
+
     def __init__(self):
+
         self.company_array = []
 
     def add_employee(self, wage_per_hour, number_of_working_days, work_hrs_per_month, company):
+
         self.company_array.append(CompanyEmpWage(wage_per_hour, number_of_working_days, work_hrs_per_month, company))
 
-    @staticmethod
-    def calculate_daily_wage(wage_per_hour, emp_hrs):
-        return emp_hrs * wage_per_hour
+    calculate_daily_wage = lambda emp_hrs, wage_per_hour: emp_hrs * wage_per_hour
 
     @staticmethod
     def check_emp_working_hours(check_emp):
+
         emp_attendence = {
             IS_PRESENT_FULL_DAY: FULL_DAY_HOURS,
             IS_PRESENT_PART_TIME: PART_TIME_HOURS,
@@ -42,6 +45,7 @@ class EmployeeWageBuilder():
         return emp_attendence.get(check_emp)
 
     def calculate_employee_salary(self, employee):
+
         working_days = 0
         total_working_hours = 0
         total_wage = 0
@@ -50,12 +54,11 @@ class EmployeeWageBuilder():
             emp_hrs = EmployeeWageBuilder.check_emp_working_hours(check_emp)
             total_working_hours += emp_hrs
             working_days += 1
-            total_wage += self.calculate_daily_wage(emp_hrs, employee.wage_per_hour)
+            total_wage += EmployeeWageBuilder.calculate_daily_wage(emp_hrs, employee.wage_per_hour)
         return total_wage
 
     def calculate_employee_wage(self):
+
         for employee in self.company_array:
             total_wage = self.calculate_employee_salary(employee)
             CompanyEmpWage.set_total_wage(employee, total_wage)
-
-

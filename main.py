@@ -8,4 +8,8 @@ if __name__ == "__main__":
     emp_wage.calculate_employee_wage()
     employees = "\n".join(str(employee) for employee in emp_wage.company_array)
     print(employees)
+<<<<<<< HEAD
+=======
+
+>>>>>>> uc11_wage_using_lambda
 
