@@ -1,0 +1,2 @@
+DEBUG:root:Invalid details re-enter the data
+ERROR:root:invalid literal for int() with base 10: 'a'
