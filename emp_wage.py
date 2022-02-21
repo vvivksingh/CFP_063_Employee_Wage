@@ -7,20 +7,38 @@ FULL_DAY_HOURS = 8
 PART_TIME_HOURS = 4
 
 
-def calculate_employee_wage(wage_per_hour, num_of_working_days, working_hour_per_month, company):
-    emp_attendence = {
-        IS_PRESENT_FULL_DAY: FULL_DAY_HOURS,
-        IS_PRESENT_PART_TIME: PART_TIME_HOURS,
-        IS_ABSENT: 0
-    }
+class EmployeeWageBuilder():
+    def __init__(self, wage_per_hour, number_of_working_days, work_hrs_per_month, company) -> None:
+        self.wage_per_hour = wage_per_hour
+        self.number_of_working_days = number_of_working_days
+        self.work_hrs_per_month = work_hrs_per_month
+        self.company = company
 
-    working_days = 0
-    total_working_hours = 0
+    def calculate_daily_wage(self, emp_hrs):
+        return emp_hrs * self.wage_per_hour
 
-    while (working_days < num_of_working_days and total_working_hours < working_hour_per_month):
-        emp_check = random.randint(0, 2)
-        total_working_hours = total_working_hours + emp_attendence.get(emp_check)
-        working_days = working_days + 1
+    @staticmethod
+    def check_emp_working_hours(check_emp):
+        emp_attendence = {
+            IS_PRESENT_FULL_DAY: FULL_DAY_HOURS,
+            IS_PRESENT_PART_TIME: PART_TIME_HOURS,
+            IS_ABSENT: 0
+        }
+        return emp_attendence.get(check_emp)
 
-    total_wage = total_working_hours * wage_per_hour
-    print(f"Employee total wage for Company {company} is {total_wage}")
+    def calculate_employee_salary(self):
+        working_days = 0
+        total_working_hours = 0
+        total_wage = 0
+        while (working_days < self.number_of_working_days and total_working_hours < self.work_hrs_per_month):
+            check_emp = random.randint(0, 2)
+            emp_hrs = EmployeeWageBuilder.check_emp_working_hours(check_emp)
+            total_working_hours += emp_hrs
+            working_days += 1
+            total_wage += self.calculate_daily_wage(emp_hrs)
+        return total_wage
+
+    def calculate_employee_wage(self):
+        self.total_wage = self.calculate_employee_salary()
+        print(f"Employee total wage for Company {self.company} is {self.total_wage}")
+
